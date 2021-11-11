@@ -1,36 +1,50 @@
 #!/bin/bash
 
+# (c) Copyright 2021, Judd Maltin
+# license: GPLv3
 # author: Judd Maltin
+# requires: macosx, brave browser
 
-# CLASS = a multisco.zip, unzipped
+# COURSE = a multisco.zip, unzipped
+COURSE_NAME=$1
+COURSE_NAME=${COURSE_NAME:-'ocp4_advanced_deployment'}
 
-CLASS="$HOME/class_slides/ocp4_advanced_application_deployment/"
-OUTPUT_DIR="$HOME/tmp/"
+COURSE_DIR=$2
+COURSE_DIR=${COURSE_DIR:-"${HOME}/class_slides/${COURSE_NAME}/"}
 
+OUTPUT_DIR=$3
+OUTPUT_DIR=${OUTPUT_DIR:-"${HOME}/class_slides/pdf_${COURSE_NAME}/"}
 
-for module in $(ls ${CLASS})
+echo $COURSE_NAME
+echo $COURSE_DIR
+echo $OUTPUT_DIR
+
+for module in $(ls ${COURSE_DIR})
 do
   echo "MODULE: ${module}"
-  echo
-  if [ -d ${CLASS}${module} ]
+  if [ -d ${COURSE_DIR}/${module} ]
   then
-    for html in $(ls ${CLASS}${module}/*.html)
+    for html_filename in $(ls ${COURSE_DIR}${module}/*.html)
     do
-      echo "HTML: ${html}"
-      output_file=$(basename ${html} .html)
-      if [ "${output_file}" = "AllSlides" ]
+      echo "HTML: ${html_filename}"
+      # build PDF filename from basename
+      output_filename=$(basename ${html_filename} .html)
+      # add module name to PDF filename for source file AllSlides.html
+      if [ "${output_filename}" = "AllSlides" ]
       then
-        output_file="${module}_Slides"
-        html="${html}?print-pdf"
+        output_filename="${module}_Slides"
+        html_filename="${html_filename}?print-pdf"
       fi
-      output_file="${output_file}.pdf"
+      # build the full path destination
+      output_filename="${OUTPUT_DIR}/${output_filename}.pdf"
+      echo "PDF: ${output_filename}"
 
-#file:///Users/jmaltin/class_slides/ocp4_advanced_application_deployment/01_Class_Intro/AllSlides.html
-
+      #file:///Users/jmaltin/class_slides/ocp4_advanced_application_deployment/01_Class_Intro/AllSlides.html
 
       open -n -a "Brave Browser" --args --profile-directory="Default" \
-      --headless --disable-gpu --print-to-pdf=${OUTPUT_DIR}${output_file} \
-      file:///${html}
+      --headless --disable-gpu --print-to-pdf=${output_filename} \
+      file:///${html_filename}
+      echo
     done
   fi
 done
