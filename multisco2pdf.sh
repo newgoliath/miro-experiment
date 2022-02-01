@@ -9,11 +9,13 @@
 COURSE_NAME=$1
 COURSE_NAME=${COURSE_NAME:-'ocp4_advanced_deployment'}
 
-COURSE_DIR=$2
+#COURSE_DIR=$2
 COURSE_DIR=${COURSE_DIR:-"${HOME}/class_slides/${COURSE_NAME}/"}
 
-OUTPUT_DIR=$3
+OUTPUT_DIR=$2
 OUTPUT_DIR=${OUTPUT_DIR:-"${HOME}/class_slides/pdf_${COURSE_NAME}/"}
+
+mkdir ${OUTPUT_DIR}
 
 echo $COURSE_NAME
 echo $COURSE_DIR
@@ -48,4 +50,3 @@ do
     done
   fi
 done
-
