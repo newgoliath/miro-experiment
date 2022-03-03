@@ -6,27 +6,27 @@
 # requires: macosx, brave browser
 
 # COURSE = a multisco.zip, unzipped
-COURSE_NAME=$1
-COURSE_NAME=${COURSE_NAME:-'ocp4_advanced_deployment'}
+COURSE_PATH=$1
+COURSE_PATH=${COURSE_PATH:-'/Users/jmaltin/class_slides/ocp4_advanced_application_deployment'}
 
-#COURSE_DIR=$2
-COURSE_DIR=${COURSE_DIR:-"${HOME}/class_slides/${COURSE_NAME}/"}
+COURSE_NAME=$(basename ${COURSE_PATH})
 
 OUTPUT_DIR=$2
-OUTPUT_DIR=${OUTPUT_DIR:-"${HOME}/class_slides/pdf_${COURSE_NAME}/"}
+#OUTPUT_DIR=${OUTPUT_DIR:-"${HOME}/class_slides/pdf_${COURSE_NAME}/"}
+OUTPUT_DIR=${OUTPUT_DIR:-"$(dirname ${COURSE_PATH})/pdf_${COURSE_NAME}/"}
 
 mkdir ${OUTPUT_DIR}
 
 echo $COURSE_NAME
-echo $COURSE_DIR
+echo $COURSE_PATH
 echo $OUTPUT_DIR
 
-for module in $(ls ${COURSE_DIR})
+for module in $(ls ${COURSE_PATH})
 do
   echo "MODULE: ${module}"
-  if [ -d ${COURSE_DIR}/${module} ]
+  if [ -d ${COURSE_PATH}/${module} ]
   then
-    for html_filename in $(ls ${COURSE_DIR}${module}/*.html)
+    for html_filename in $(ls ${COURSE_PATH}/${module}/*.html)
     do
       echo "HTML: ${html_filename}"
       # build PDF filename from basename
