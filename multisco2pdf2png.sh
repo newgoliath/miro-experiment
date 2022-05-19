@@ -17,11 +17,12 @@
 # requires:
 # * macosx
 # * brave browser
+# * `convert` from ImageMagick
 # * multisco.zip, unzipped
 
 
 COURSE_PATH=$1
-COURSE_PATH=${COURSE_PATH:-"$HOME/class_slides/ocp4_advanced_application_deployment"}
+COURSE_PATH=${COURSE_PATH:-"$HOME/class_slides/ocp4_post_install_config_rhacm"}
 
 COURSE_NAME=$(basename ${COURSE_PATH})
 
@@ -61,6 +62,19 @@ do
       open -n -a "${CHROME_BROWSER}" --args --profile-directory="Default" \
       --headless --disable-gpu --print-to-pdf=${output_filename} \
       file:///${html_filename}
+
+
+      # turn it into PNGs and remove the last page ("Module Complete")
+      if [[ ${output_filename} =~ "Slides.pdf" ]]
+      then
+        sleep 3
+
+        convert_command="convert -density 192 ${output_filename} +delete ${output_filename/%pdf/png}"
+
+        echo CONVERT PDF to PNG: $convert_command
+        $($convert_command)
+      fi
+
       echo
     done
   fi
