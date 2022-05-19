@@ -1,0 +1,12 @@
+== Overview
+
+. Run `sync_slides.sh` first to
+* get the slides from Jenkins
+* create projects on the dev cluster
+* push the slides to the dev cluster
+* create a LAB_LIST.csv to copy paste into Miro for slide links.
+. Open LAB_LIST.csv in spreadsheet and copy/paste cells into Miro to setup lab links.
+. Run `multisco2pdf2png.sh` second to
+* Create PDFs of each of the modules
+* Create individual PNGs for each modules' Slides
+. Upload Slide PNGs to Miro
