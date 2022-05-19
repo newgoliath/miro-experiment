@@ -44,7 +44,7 @@ fi
 echo $( odo push --force-build -v4 )
 echo
 
-if $( odo url create pfe-jm --port 8080 > /dev/null );
+if $( odo url create pe-jm --port 8080 > /dev/null );
 then
   echo
   echo "URL Created"
