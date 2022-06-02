@@ -58,7 +58,7 @@ else
   echo $( odo create httpd $PROJECT --app vilt )
 fi
 
-if $( odo url create pe-${INSTRUCTOR_INITIALS}  --port 8080 > /dev/null );
+if $( odo url create pt-${INSTRUCTOR_INITIALS}  --port 8080 > /dev/null );
 then
   echo
   echo "URL Created: "
