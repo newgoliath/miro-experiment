@@ -22,7 +22,7 @@
 
 
 COURSE_PATH=$1
-COURSE_PATH=${COURSE_PATH:-"$HOME/class_slides/ocp4_post_install_config_rhacm"}
+COURSE_PATH=${COURSE_PATH:-"$HOME/class_slides/ocp4_advanced_application_deployment"}
 
 COURSE_NAME=$(basename ${COURSE_PATH})
 
